@@ -176,7 +176,7 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  html_editor_enhanced:
+  html_editor_enhanced_android_fix:
     dependency: "direct main"
     description:
       path: ".."

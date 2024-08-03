@@ -848,7 +848,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:html_editor_enhanced/html_editor.dart';
+import 'package:html_editor_enhanced_android_fix/html_editor.dart';
 
 class _ExampleState extends State<Example> {
   final HtmlEditorController controller = HtmlEditorController();

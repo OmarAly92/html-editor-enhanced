@@ -3,7 +3,7 @@ import 'dart:collection';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:html_editor_enhanced/html_editor.dart';
+import 'package:html_editor_enhanced_android_fix/html_editor.dart';
 
 /// Options that modify the editor and its behavior
 class HtmlEditorOptions {
@@ -138,14 +138,9 @@ class HtmlToolbarOptions {
       FontButtons(clearAll: false),
       ColorButtons(),
       ListButtons(listStyles: false),
-      ParagraphButtons(
-          textDirection: false, lineHeight: false, caseConverter: false),
+      ParagraphButtons(textDirection: false, lineHeight: false, caseConverter: false),
       InsertButtons(
-          video: false,
-          audio: false,
-          table: false,
-          hr: false,
-          otherFile: false),
+          video: false, audio: false, table: false, hr: false, otherFile: false),
     ],
     this.otherFileExtensions,
     this.imageExtensions,
@@ -250,8 +245,7 @@ class HtmlToolbarOptions {
   /// (true = continue with internal handler, false = do not use internal handler)
   ///
   /// If no interceptor is set, the plugin uses the internal handler.
-  final FutureOr<bool> Function(String, InsertFileType)?
-      mediaLinkInsertInterceptor;
+  final FutureOr<bool> Function(String, InsertFileType)? mediaLinkInsertInterceptor;
 
   /// Allows you to intercept any image/video/audio files being inserted into the editor.
   /// The function passes the PlatformFile class, which contains all the file data
@@ -262,8 +256,7 @@ class HtmlToolbarOptions {
   /// (true = continue with internal handler, false = do not use internal handler)
   ///
   /// If no interceptor is set, the plugin uses the internal handler.
-  final FutureOr<bool> Function(PlatformFile, InsertFileType)?
-      mediaUploadInterceptor;
+  final FutureOr<bool> Function(PlatformFile, InsertFileType)? mediaUploadInterceptor;
 
   /// Allows you to intercept any button press. The function passes the ButtonType
   /// enum, which tells you which button was pressed, the current selected status of
@@ -415,8 +408,7 @@ class OtherOptions {
   const OtherOptions({
     this.decoration = const BoxDecoration(
       borderRadius: BorderRadius.all(Radius.circular(4)),
-      border:
-          Border.fromBorderSide(BorderSide(color: Color(0xffececec), width: 1)),
+      border: Border.fromBorderSide(BorderSide(color: Color(0xffececec), width: 1)),
     ),
     this.height = 400,
   });

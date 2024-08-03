@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'dart:html' as html;
 
 import 'package:flutter/foundation.dart';
-import 'package:html_editor_enhanced/html_editor.dart';
-import 'package:html_editor_enhanced/src/html_editor_controller_unsupported.dart'
+import 'package:html_editor_enhanced_android_fix/html_editor.dart';
+import 'package:html_editor_enhanced_android_fix/src/html_editor_controller_unsupported.dart'
     as unsupported;
 import 'package:meta/meta.dart';
 
@@ -55,8 +55,8 @@ class HtmlEditorController extends unsupported.HtmlEditorController {
   @override
   Future<String> getText() async {
     _evaluateJavascriptWeb(data: {'type': 'toIframe: getText'});
-    var e = await html.window.onMessage.firstWhere(
-        (element) => json.decode(element.data)['type'] == 'toDart: getText');
+    var e = await html.window.onMessage
+        .firstWhere((element) => json.decode(element.data)['type'] == 'toDart: getText');
     String text = json.decode(e.data)['text'];
     if (processOutputHtml &&
         (text.isEmpty ||
@@ -73,8 +73,8 @@ class HtmlEditorController extends unsupported.HtmlEditorController {
     } else {
       _evaluateJavascriptWeb(data: {'type': 'toIframe: getSelectedText'});
     }
-    var e = await html.window.onMessage.firstWhere((element) =>
-        json.decode(element.data)['type'] == 'toDart: getSelectedText');
+    var e = await html.window.onMessage.firstWhere(
+        (element) => json.decode(element.data)['type'] == 'toDart: getSelectedText');
     return json.decode(e.data)['text'];
   }
 
@@ -147,8 +147,7 @@ class HtmlEditorController extends unsupported.HtmlEditorController {
   /// Note: This method should only be used for plaintext strings
   @override
   void insertText(String text) {
-    _evaluateJavascriptWeb(
-        data: {'type': 'toIframe: insertText', 'text': text});
+    _evaluateJavascriptWeb(data: {'type': 'toIframe: insertText', 'text': text});
   }
 
   /// Insert HTML at the position of the cursor in the editor
@@ -156,18 +155,14 @@ class HtmlEditorController extends unsupported.HtmlEditorController {
   @override
   void insertHtml(String html) {
     html = _processHtml(html: html);
-    _evaluateJavascriptWeb(
-        data: {'type': 'toIframe: insertHtml', 'html': html});
+    _evaluateJavascriptWeb(data: {'type': 'toIframe: insertHtml', 'html': html});
   }
 
   /// Insert a network image at the position of the cursor in the editor
   @override
   void insertNetworkImage(String url, {String filename = ''}) {
-    _evaluateJavascriptWeb(data: {
-      'type': 'toIframe: insertNetworkImage',
-      'url': url,
-      'filename': filename
-    });
+    _evaluateJavascriptWeb(
+        data: {'type': 'toIframe: insertNetworkImage', 'url': url, 'filename': filename});
   }
 
   /// Insert a link at the position of the cursor in the editor
@@ -187,7 +182,7 @@ class HtmlEditorController extends unsupported.HtmlEditorController {
   @override
   void clearFocus() {
     throw Exception(
-        'Flutter Web environment detected, please make sure you are importing package:html_editor_enhanced/html_editor.dart and check kIsWeb before calling this method.');
+        'Flutter Web environment detected, please make sure you are importing package:html_editor_enhanced_android_fix/html_editor.dart and check kIsWeb before calling this method.');
   }
 
   /// Resets the height of the editor back to the original if it was changed to
@@ -196,7 +191,7 @@ class HtmlEditorController extends unsupported.HtmlEditorController {
   @override
   void resetHeight() {
     throw Exception(
-        'Flutter Web environment detected, please make sure you are importing package:html_editor_enhanced/html_editor.dart and check kIsWeb before calling this method.');
+        'Flutter Web environment detected, please make sure you are importing package:html_editor_enhanced_android_fix/html_editor.dart and check kIsWeb before calling this method.');
   }
 
   /// Refresh the page
@@ -233,8 +228,8 @@ class HtmlEditorController extends unsupported.HtmlEditorController {
       {bool hasReturnValue = false}) async {
     _evaluateJavascriptWeb(data: {'type': 'toIframe: $name'});
     if (hasReturnValue) {
-      var e = await html.window.onMessage.firstWhere(
-          (element) => json.decode(element.data)['type'] == 'toDart: $name');
+      var e = await html.window.onMessage
+          .firstWhere((element) => json.decode(element.data)['type'] == 'toDart: $name');
       return json.decode(e.data);
     }
   }
@@ -256,17 +251,14 @@ class HtmlEditorController extends unsupported.HtmlEditorController {
   /// Internal function to change text direction on Web
   @override
   void changeTextDirection(String direction) {
-    _evaluateJavascriptWeb(data: {
-      'type': 'toIframe: changeTextDirection',
-      'direction': direction
-    });
+    _evaluateJavascriptWeb(
+        data: {'type': 'toIframe: changeTextDirection', 'direction': direction});
   }
 
   /// Internal function to change case on Web
   @override
   void changeCase(String changed) {
-    _evaluateJavascriptWeb(
-        data: {'type': 'toIframe: changeCase', 'case': changed});
+    _evaluateJavascriptWeb(data: {'type': 'toIframe: changeCase', 'case': changed});
   }
 
   /// Internal function to insert table on Web
@@ -282,8 +274,7 @@ class HtmlEditorController extends unsupported.HtmlEditorController {
   @override
   void addNotification(String html, NotificationType notificationType) {
     if (notificationType == NotificationType.plaintext) {
-      _evaluateJavascriptWeb(
-          data: {'type': 'toIframe: addNotification', 'html': html});
+      _evaluateJavascriptWeb(data: {'type': 'toIframe: addNotification', 'html': html});
     } else {
       _evaluateJavascriptWeb(data: {
         'type': 'toIframe: addNotification',
@@ -323,7 +314,7 @@ class HtmlEditorController extends unsupported.HtmlEditorController {
       html.window.postMessage(json, '*');
     } else {
       throw Exception(
-          'Non-Flutter Web environment detected, please make sure you are importing package:html_editor_enhanced/html_editor.dart');
+          'Non-Flutter Web environment detected, please make sure you are importing package:html_editor_enhanced_android_fix/html_editor.dart');
     }
   }
 }
