@@ -71,9 +71,10 @@ class _HtmlEditorWidgetMobileState extends State<HtmlEditorWidget> {
     if (widget.htmlEditorOptions.filePath != null) {
       filePath = widget.htmlEditorOptions.filePath!;
     } else if (widget.plugins.isEmpty) {
-      filePath = 'packages/html_editor_enhanced/assets/summernote-no-plugins.html';
+      filePath =
+          'packages/html_editor_enhanced_android_fix/assets/summernote-no-plugins.html';
     } else {
-      filePath = 'packages/html_editor_enhanced/assets/summernote.html';
+      filePath = 'packages/html_editor_enhanced_android_fix/assets/summernote.html';
     }
     super.initState();
   }
@@ -141,17 +142,14 @@ class _HtmlEditorWidgetMobileState extends State<HtmlEditorWidget> {
                           }
                         });
                   },
-                  initialOptions: InAppWebViewGroupOptions(
-                      crossPlatform: InAppWebViewOptions(
-                        javaScriptEnabled: true,
-                        transparentBackground: true,
-                        useShouldOverrideUrlLoading: true,
-                      ),
-                      android: AndroidInAppWebViewOptions(
-                        useHybridComposition:
-                            widget.htmlEditorOptions.androidUseHybridComposition,
-                        loadWithOverviewMode: true,
-                      )),
+                  // initialSettings: InAppWebViewSettings(
+                  //   javaScriptEnabled: true,
+                  //   transparentBackground: true,
+                  //   useShouldOverrideUrlLoading: true,
+                  //   useHybridComposition: widget.htmlEditorOptions
+                  //       .androidUseHybridComposition,
+                  //   loadWithOverviewMode: true,
+                  // ),
                   initialUserScripts: widget.htmlEditorOptions.mobileInitialScripts
                       as UnmodifiableListView<UserScript>?,
                   contextMenu: widget.htmlEditorOptions.mobileContextMenu as ContextMenu?,
@@ -174,9 +172,8 @@ class _HtmlEditorWidgetMobileState extends State<HtmlEditorWidget> {
                     print(message.message);
                   },
                   onWindowFocus: (controller) async {
-                    if (widget.htmlEditorOptions.shouldEnsureVisible &&
-                        Scrollable.of(context) != null) {
-                      await Scrollable.of(context)!.position.ensureVisible(
+                    if (widget.htmlEditorOptions.shouldEnsureVisible) {
+                      await Scrollable.of(context).position.ensureVisible(
                             context.findRenderObject()!,
                           );
                     }
@@ -450,7 +447,7 @@ class _HtmlEditorWidgetMobileState extends State<HtmlEditorWidget> {
                           widget.htmlEditorOptions.darkMode != false) {
                         //todo fix for iOS (https://github.com/pichillilorenzo/flutter_inappwebview/issues/695)
                         var darkCSS =
-                            '<link href=\"${(widget.htmlEditorOptions.filePath != null ? "file:///android_asset/flutter_assets/packages/html_editor_enhanced/assets/" : "") + "summernote-lite-dark.css"}\" rel=\"stylesheet\">';
+                            '<link href=\"${(widget.htmlEditorOptions.filePath != null ? "file:///android_asset/flutter_assets/packages/html_editor_enhanced_android_fix/assets/" : "") + "summernote-lite-dark.css"}\" rel=\"stylesheet\">';
                         await controller.evaluateJavascript(
                             source: "\$('head').append('$darkCSS');");
                       }
@@ -510,9 +507,8 @@ class _HtmlEditorWidgetMobileState extends State<HtmlEditorWidget> {
                       controller.addJavaScriptHandler(
                           handlerName: 'onChangeContent',
                           callback: (contents) {
-                            if (widget.htmlEditorOptions.shouldEnsureVisible &&
-                                Scrollable.of(context) != null) {
-                              Scrollable.of(context)!.position.ensureVisible(
+                            if (widget.htmlEditorOptions.shouldEnsureVisible) {
+                              Scrollable.of(context).position.ensureVisible(
                                     context.findRenderObject()!,
                                   );
                             }
