@@ -1,6 +1,7 @@
 # Flutter Html Editor - Enhanced
 [![pub package](https://img.shields.io/pub/v/html_editor_enhanced.svg)](https://pub.dev/packages/html_editor_enhanced)
 
+This package is a fork of html_editor_enhanced version 2.6.0, created to address an Android bug caused by the flutter_inappwebview version 6.0.0. To resolve this issue, the flutter_inappwebview dependency has been downgraded from 6.0.0 to 5.8.0. Additionally, the html_editor_widget_mobile.dart file has been modified to use the code from html_editor_enhanced version 2.5.1.
 Flutter HTML Editor Enhanced is a text editor for Android, iOS, and Web to help write WYSIWYG HTML code with the Summernote JavaScript wrapper.
 
 Note that the API shown in this README.md file shows only a part of the documentation and, also, conforms to the GitHub master branch only! So, here you could have methods, options, and events that aren't published/released yet! If you need a specific version, please change the GitHub branch of this repository to your version or use the online [API Reference](https://pub.dev/documentation/html_editor_enhanced/latest/) (recommended).
